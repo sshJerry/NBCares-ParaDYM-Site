@@ -1,0 +1,61 @@
+{% extends 'ProjectSite/blank.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Event Update</title>
+{% endblock %}
+
+
+{% block body %}
+    <div class="card">
+
+        {# Title Header #}
+        <div class="card-header">
+            Update Task
+        </div>
+
+        {# In-Header Body #}
+        <div class="card-body">
+            {# TESTING Input and Button #}
+            <form action="" method="post">
+                {% csrf_token %}
+                {# INPUT CHECK ROW #}
+                <div class="row">
+                    {#z` TEXT BOX #}
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Event Name</label>
+                        <!--<input type="text" class="form-control" id="recipient-name">-->
+                        {{ event_add.event_name }}
+                    </div>
+                    {# CHECK BOX #}
+                    <div class="col-10">
+                        <h5 class="card-title inline mb-1 ">Event Date</h5>
+                        {{ event_add.event_date }}
+                    </div>
+                    <div class="col-10">
+                        <h5 class="card-title inline mb-1 ">Event Start Time </h5>
+                        {{ event_add.event_sTime }}
+                    </div>
+                    <div class="col-10">
+                        <h5 class="card-title inline mb-1 ">Event End Time</h5>
+                        {{ event_add.event_eTime }}
+                    </div>
+                    <div class="col-10">
+                        <h5 class="card-title inline mb-1 ">Event Description</h5>
+                        {{ event_add.event_description }}
+                    </div>
+                    <div class="col-10">
+                        <h5 class="card-title inline mb-1 ">Event Tags</h5>
+                        {{ event_add.event_tag }}
+                    </div>
+                </div>
+                {# BACK AND UPDATE ROW#}
+                <div class="row">
+                    <div class="col mt-4">
+                        <a href="{% url 'events' %}" class="btn btn-info"><- Go Back</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

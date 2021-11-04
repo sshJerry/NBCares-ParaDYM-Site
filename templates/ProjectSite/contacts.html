@@ -1,0 +1,158 @@
+{% extends 'ProjectSite/base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Contacts</title>
+{% endblock %}
+
+    {% block more-styles %}
+        <link rel="stylesheet" href="{% static 'css/ProjectSite.css' %}">
+        <link rel="stylesheet" href="{% static 'css/contacts.css' %}">
+        <script src=" {% static 'js/ProjectSite.js' %}"></script>
+    {% endblock %}
+
+{% block body %}
+    <section id="contacts_contact">
+        <header class="header-g">
+			<ul class="indicator ul-g">
+				<li data-filter="all" class="li-g"><a href="#" class=".a-g">All</a></li>
+				<li data-filter="Blazer" class="li-g"><a href="#" class=".a-g">Afterschool</a></li>
+				<li data-filter="Watch" class="li-g"><a href="#" class=".a-g">Art</a></li>
+				<li data-filter="Shoes" class="li-g"><a href="#" class=".a-g">Babysitting</a></li>
+				<li data-filter="Mobile" class="li-g"><a href="#" class=".a-g">Baseball</a></li>
+				<li data-filter="Accessories" class="li-g"><a href="#" class=".a-g">Accessories</a></li>
+			</ul>
+            <!--
+			<div class="filter-condition">
+				<span>View As a</span>
+				<select name="" id="select">
+					<option value="Default">Default</option>
+					<option value="LowToHigh">Low to high</option>
+					<option value="HighToLow">High to low</option>
+				</select>
+			</div>
+			-->
+		</header>
+        <section>
+            <div class="container px-5">
+                <div class="gx-5 align-items-center">
+                    <div class="col-lg-12 order-lg-1">
+                        <div class="p-5">
+                            <h2 class="display-4 text-center">Page Is Undergoing Continuous Development</h2>
+                            <p class="text-center">Please be patient. This is a concept page.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+		<div class="product-field ">
+			<ul class="items ul-g">
+				<li data-category="" data-price="" class="li-g">
+					<picture>
+						<img class="img-g" src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80" alt="">
+					</picture>
+					<div class="detail">
+						<p class="icon">
+						</p>
+						<strong>NB Parks</strong>
+						<span>https://nbparksnrec.org</span>
+                        <span>Various Locations, New Britain CT</span>
+                        <span>(860) 826-3360</span>
+						<!--<small>Buy now</small>-->
+					</div>
+				</li>
+				<li data-category="" data-price="" class="li-g">
+					<picture>
+						<img class="img-g" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="">
+					</picture>
+					<div class="detail">
+						<p class="icon">
+						</p>
+						<strong>YMCA Art</strong>
+						<span>Art Camp | New Britain-Berlin YMCA (nbbymca.org)</span>
+                        <span>50 High St New Britain CT 06051</span>
+                        <span>(860) 229-3787</span>
+					</div>
+				</li>
+				<li data-category="" data-price="" class="li-g">
+					<picture>
+						<img class="img-g" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80" alt="">
+					</picture>
+					<div class="detail">
+						<p class="icon">
+						</p>
+						<strong>New Britain Roots</strong>
+						<span>https://www.newbritainroots.org/</span>
+                        <span>57 Fern St New Britain CT 06053</span>
+                        <span>(860) 259-4290</span>
+					</div>
+				</li>
+				<li data-category="" data-price="" class="li-g">
+					<picture>
+						<img class="img-g" src="https://images.unsplash.com/photo-1488161628813-04466f872be2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=764&q=80" alt="">
+					</picture>
+					<div class="detail">
+						<p class="icon">
+						</p>
+						<strong>YWCA Karate</strong>
+						<span>https://ywcanb.org</span>
+                        <span>19 Franklin Sq New Britain CT 06051</span>
+                        <span>(860) 225-4681</span>
+					</div>
+				</li>
+				<li data-category="" data-price="" class="li-g">
+					<picture>
+						<img class="img-g" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80" alt="">
+					</picture>
+					<div class="detail">
+						<p class="icon">
+						</p>
+						<strong>CCSU Literacy Center</strong>
+						<span>https://ccsu.edu</span>
+                        <span>1615 Stanlet St New Britain CT, HB 209</span>
+                        <span>(860) 832-2175</span>
+					</div>
+				</li>
+				<li data-category="" data-price="" class="li-g">
+					<picture>
+						<img class="img-g" src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80" alt="">
+					</picture>
+					<div class="detail">
+						<p class="icon">
+						</p>
+						<strong>YMCA S.T.E.M. Camp</strong>
+						<span>https://nbbymca.org</span>
+                        <span>50 High St New Britain CT 06051</span>
+                        <span>(860) 229-3787</span>
+					</div>
+				</li>
+				<li data-category="" data-price="" class="li-g">
+					<picture>
+						<img class="img-g" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80" alt="">
+					</picture>
+					<div class="detail">
+						<p class="icon">
+						</p>
+						<strong>New England Schock</strong>
+						<span>https://neshock.com</span>
+                        <span>YMCA of New Britain CT</span>
+                        <span>(860) 229-3787</span>
+					</div>
+				</li>
+				<li data-category="" data-price="" class="li-g">
+					<picture>
+						<img class="img-g" src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=765&q=80" alt="">
+					</picture>
+					<div class="detail">
+						<p class="icon">
+						</p>
+						<strong>Boys & Girls club</strong>
+						<span>https://bgclubng.org</span>
+                        <span>150 Washington St New Britain CT</span>
+                        <span>(860) 229-2865</span>
+					</div>
+				</li>
+			</ul>
+		</div>
+    </section>
+{% endblock %}
