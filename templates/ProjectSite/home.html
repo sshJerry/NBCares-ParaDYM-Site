@@ -1,0 +1,88 @@
+{% extends 'ProjectSite/base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Home</title>
+{% endblock %}
+
+{% block body %}
+    <section>
+        <header class="masthead text-center text-white">
+            <div class="masthead">
+                <div class="container px-5">
+                    <h2 class="mb-5 text-white display-4 font-weight-bold">NB CARES – brings all the information to your laptop, desktop, tablet, or smartphone</h2>
+                    <p>So that you and yours can easily find social services, ParaDYM Academy, Inc. and the New Britain Housing Authority have partnered with Central Connecticut State University to build this website.
+We’ve combined an agency-supported community events calendar with a full menu of self-sufficiency services</p>
+                    <form action="{% url 'about' %}"><button style="padding: 1rem 3rem;border-radius: 2rem;border: none;outline: none;line-height: 3.6rem;text-transform: capitalize;cursor: pointer;font-style: normal;font-weight: normal;font-size: 2rem;">Learn More</button></form>
+                </div>
+            </div>
+        </header>
+    </section>
+
+
+    <section class="main-section">
+        <div>
+            <!-- https://static.wixstatic.com/media/9e36d9_569ac91c46e24680a952e24f1311f7d7~mv2_d_2000_1334_s_2.jpg/v1/fill/w_1922,h_850,al_c,q_85,usm_0.33_1.00_0.00/9e36d9_569ac91c46e24680a952e24f1311f7d7~mv2_d_2000_1334_s_2.webp -->
+            <!-- <img class="img-fluid" src="https://via.placeholder.com/1920" alt="" style="width: 1922px; height: 850px; object-fit: cover; object-position: 50% 50%;"> -->
+            <img class="special" src="https://static.wixstatic.com/media/d6c8f9_ce18e01ada6743018b7584f2b7c0d4d5~mv2.jpg/v1/fill/w_1652,h_642,al_c,q_85,usm_0.66_1.00_0.01/d6c8f9_ce18e01ada6743018b7584f2b7c0d4d5~mv2.webp">
+        </div>
+
+        <div class="main-left-side"></div>
+        <div class="main-right-side"></div>
+    </section>
+
+
+    <section id="home_vision">
+            <div class="container px-5">
+                <div class="row gx-5 align-items-center">
+                    <div class="col-lg-6 order-lg-2">
+                        <!-- % static 'images/01.jpg' %} -->
+                        <!--<div class="p-5"><img class="img-fluid rounded-circle" src="https://via.placeholder.com/700" alt="..." /></div>-->
+                        <div class="p-5"><img class="img-fluid rounded-circle" src="https://static.wixstatic.com/media/aa6dd5_39c0b44faa3546eb9f5fb7e0cb291f4b~mv2.png/v1/fill/w_574,h_366,al_c,q_85,usm_0.66_1.00_0.01/aa6dd5_39c0b44faa3546eb9f5fb7e0cb291f4b~mv2.webp" alt="..." /></div>
+                    </div>
+                    <div class="col-lg-6 order-lg-1">
+                        <div class="p-5">
+                            <h2 class="display-4">Collaborating Actively</h2>
+                            <p>With people lacking personal and social capital</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Content section 2-->
+        <section>
+            <div class="container px-5">
+                <div class="row gx-5 align-items-center">
+                    <div class="col-lg-6">
+                        <!-- % static 'images/01.jpg' %} -->
+                        <!--<div class="p-5"><img class="img-fluid rounded-circle" src="https://via.placeholder.com/700" alt="..." /></div>-->
+                        <div class="p-5"><img class="img-fluid rounded-circle" src="https://static.wixstatic.com/media/aa6dd5_91c061194bc143a1bf840e434b9842f8~mv2.png/v1/fill/w_574,h_366,al_c,q_85,usm_0.66_1.00_0.01/aa6dd5_91c061194bc143a1bf840e434b9842f8~mv2.webp" alt="..." /></div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="p-5">
+                            <h2 class="display-4">Allows for</h2>
+                            <p>A network of agencies and resources that can become social capital</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Content section 3-->
+        <section>
+            <div class="container px-5">
+                <div class="row gx-5 align-items-center">
+                    <div class="col-lg-6 order-lg-2">
+                        <!-- % static 'images/01.jpg' %} -->
+                        <!--<div class="p-5"><img class="img-fluid rounded-circle" src="https://via.placeholder.com/700" alt="..." /></div>-->
+                        <div class="p-5"><img class="img-fluid rounded-circle" src="https://static.wixstatic.com/media/aa6dd5_da304c5e8ab945d7bd3c7d0bc38b3f83~mv2.png/v1/fill/w_574,h_366,al_c,q_85,usm_0.66_1.00_0.01/aa6dd5_da304c5e8ab945d7bd3c7d0bc38b3f83~mv2.webp" alt="..." /></div>
+                    </div>
+                    <div class="col-lg-6 order-lg-1">
+                        <div class="p-5">
+                            <h2 class="display-4">Invites</h2>
+                            <p>Relationships grounded in collaboration, communication, & commitment</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+{% endblock %}
