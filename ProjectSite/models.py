@@ -22,3 +22,4 @@ class ProjectSite(models.Model):
 
     def __str__(self):
         return self.event_description
+#When writing {{ event }}, The description is whats returned

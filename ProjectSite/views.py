@@ -50,7 +50,7 @@ def delete_events(request, event_id):
         event.delete()
         return redirect('events')
     context = {'event': event}
-    return render(request, 'ProjectSite/events.html', context)
+    return render(request, 'ProjectSite/events-delete.html', context)
 
 
 def view_login(request):
