@@ -1,0 +1,23 @@
+{% extends 'ProjectSite/blank.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Event Delete</title>
+{% endblock %}
+
+{% block body %}
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="card">
+            <div class="card-header">
+                Delete Event
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Are you sure that you want to delete
+                    <span id="task-deleted">{{ event.event_name }}</span>?</h5>
+                <a href="{% url 'events' %}" class="btn btn-info"><- Go Back</a>
+                <input type="submit" class="btn btn-danger" value="Yes, delete">
+            </div>
+        </div>
+    </form>
+{% endblock %}
