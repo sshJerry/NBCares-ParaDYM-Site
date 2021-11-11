@@ -1,5 +1,4 @@
-
-/*box-sizing: border-box; IN * */
+/* -------------------------- N/A -------------------------- */
 * {
     margin: 0;
     padding: 0;
@@ -11,14 +10,26 @@ html{
 }
 
 body{
-    --main-color: #A27900;
-    --primary-color: #CEA335;
-    --button-background: #C4224A;
-    --primary-button-background: #9D182D;
-    --background-color: #7E1215;
+    --main-color: #EFD466;
+    --primary-color: #D7B030; /*Darker Gold, Can be used for text on white background */
+    --button-background: #FFF7B6; /*Light Gold, Used for contrast against darker background */
+    --primary-button-background: #093657; /*Lighter Blue, Subheadings? */
+    --background-color: #062844; /*Darker Blue, Background */
 }
 
 /* -------------------------- HOME SECTION-------------------------- */
+h1,h2 {font-family: 'JetBrains Mono', monospace;color: var(--primary-button-background);}
+h3, h4 {font-family: 'Avenir', monospace;color: var(--primary-color);}
+p,button:hover{font-family: 'JetBrains Mono', monospace;color: var(--primary-color);}
+button{font-family: 'JetBrains Mono', monospace;color: var(--primary-button-background);}
+a,li{font-family: 'JetBrains Mono', monospace;color: var(--button-background);}
+p{
+    font-size: 1.8rem;
+    line-height: 150%;
+    font-style: normal;
+    font-weight: normal;
+}
+
 header{background-color: var(--background-color);}
 .masthead{
     position: relative;
@@ -29,22 +40,19 @@ header{background-color: var(--background-color);}
     background: var(--background-color);
     /*url("https://i.imgur.com/LtnNISV.png");*/
     background-size: cover;
-    padding-top: 8rem;
-    padding-bottom: 8rem;
+    padding-top: 0.5rem; /* REQUESTED BY CLIENT */
+    padding-bottom: 4rem;
 }
 
 .special{
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;
-    margin: 0 0 20px;
+    margin: 0 0 5px;
     display: block;
     width: 100%;
     height: auto;
 }
 
-
-h1,h2 {font-family: 'JetBrains Mono', monospace;color: var(--primary-color);}
-h3, h4 {font-family: 'Avenir', monospace;color: var(--primary-color);}
 h3 {
     font-weight: 750;
     font-size: 2.9rem;
@@ -52,35 +60,11 @@ h3 {
     text-transform: capitalize;
 }
 
-p,a,li,button {font-family: 'JetBrains Mono', monospace;color: var(--primary-color);}
-p{
-    font-size: 1.8rem;
-    line-height: 150%;
-    font-style: normal;
-    font-weight: normal;
-}
-
 a{text-decoration: none;cursor: pointer;}
 li{list-style: none;}
 
-/*button{
-    padding: 1rem 3rem;
-    border-radius: 2rem;
-    border: none;
-    outline: none;
-    line-height: 3.6rem;
-    text-transform: capitalize;
-    cursor: pointer;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 2rem;
-}*/
-button:hover{color: var(--button-background);}
-
 
 /*-------------------------- MAIN CONTENT SECTION --------------------------*/
-/*-------------------------- N/A --------------------------*/
-
 
 /*-------------------------- NAV BAR --------------------------*/
 .navbar {
@@ -196,6 +180,7 @@ footer{
 footer img{width: 14rem;height: 8rem;}
 footer div h4{font-size: 3rem;text-transform: capitalize;}
 footer div a{font-size: 1.7rem;line-height: 150%;}
+footer p {font-size: small;}
 
 /*-------------------------- RESPONSIVE CONTAINERS --------------------------*/
 .container{
