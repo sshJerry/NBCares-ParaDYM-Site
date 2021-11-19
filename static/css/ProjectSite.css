@@ -24,7 +24,7 @@ p,button:hover{font-family: 'JetBrains Mono', monospace;color: var(--primary-col
 button{font-family: 'JetBrains Mono', monospace;color: var(--primary-button-background);}
 a,li{font-family: 'JetBrains Mono', monospace;color: var(--button-background);}
 p{
-    font-size: 1.8rem;
+    font-size: 2.5rem;
     line-height: 150%;
     font-style: normal;
     font-weight: normal;
