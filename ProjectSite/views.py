@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ProjectForms
-from .models import ProjectSite
+from .models import Event, Organization, OrgEvent
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout
 
@@ -25,13 +25,13 @@ def view_events(request):
             event_add.save()
             return redirect('events')
 
-    events = ProjectSite.objects.all()
+    events = Event.objects.all()
     context = {'events': events, 'event_add': event_add}
     return render(request, 'ProjectSite/events.html', context)
 
 
 def update_events(request, event_id):
-    event = ProjectSite.objects.get(id=event_id)
+    event = Event.objects.get(id=event_id)
 
     if request.method == 'POST':
         event_form = ProjectForms(request.POST, instance=event)
@@ -45,7 +45,7 @@ def update_events(request, event_id):
 
 
 def delete_events(request, event_id):
-    event = ProjectSite.objects.get(id=event_id)
+    event = Event.objects.get(id=event_id)
     if request.method == 'POST':
         event.delete()
         return redirect('events')
@@ -62,7 +62,7 @@ def view_login(request):
             return redirect('home')
     else:
         login_form = AuthenticationForm()
-    context = {'login_form' : login_form}
+    context = {'login_form': login_form}
     return render(request, 'ProjectSite/login.html', context)
 
 
@@ -73,3 +73,28 @@ def view_logout(request):
 
 def view_settings(request):
     return render(request, 'ProjectSite/settings.html')
+
+
+def view_admin(request):
+    orgevents = OrgEvent.objects.all()
+    orgs = Organization.objects.all()
+
+    total_orgs = orgs.count()
+    total_events = orgevents.count()
+    pending_events = orgevents.filter(org_event_status='Waiting Approval').count()
+    completed_events = orgevents.filter(org_event_status='Accepted').count()
+
+    context = {'orgs': orgs, 'orgevents': orgevents,
+               'total_orgs': total_orgs, 'total_events': total_events,
+               'pending_events': pending_events, 'completed_events': completed_events
+               }
+    return render(request, 'ProjectSite/admin.html', context)
+
+
+def view_admin_organzation(request, pk):
+    org = Organization.objects.get(id=pk)
+    #orgevents = org.order_by.all()
+    orgevents = org.orgevent_set.all()
+
+    context = {'org': org, 'orgevents': orgevents}
+    return render(request, 'ProjectSite/admin-organization.html',context)

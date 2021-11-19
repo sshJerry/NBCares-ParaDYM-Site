@@ -11,4 +11,6 @@ urlpatterns = [
     path('setting', views.view_settings, name="settings"),
     path('update/<int:event_id>', views.update_events, name="update_events"),
     path('delete/<int:event_id>', views.delete_events, name="delete_events"),
+    path('admin', views.view_admin, name="admin"),
+    path('admin_organization/<str:pk>', views.view_admin_organzation, name="admin_organization"),
 ]

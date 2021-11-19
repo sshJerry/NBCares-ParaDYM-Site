@@ -1,5 +1,5 @@
 from django import forms
-from .models import ProjectSite
+from .models import Event
 
 
 class ProjectForms(forms.ModelForm):
@@ -8,7 +8,7 @@ class ProjectForms(forms.ModelForm):
                ('Elderly', 'Elderly'), ('Other', 'Other'))
 
     class Meta:
-        model = ProjectSite
+        model = Event
         fields = '__all__'
 
     widgets = {
