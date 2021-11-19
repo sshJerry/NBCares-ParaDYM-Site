@@ -20,18 +20,13 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark navbar-custom mb-5">
     <div class="container px-4">
-        <a class="navbar-brand" href="{% url 'home' %}"><img
-                src="https://static.wixstatic.com/media/aa6dd5_c2c807f592a344edaa25e7fea06f6b3b~mv2.png/v1/fill/w_278,h_144,al_c,q_85,usm_0.66_1.00_0.01/aa6dd5_c2c807f592a344edaa25e7fea06f6b3b~mv2.webp"
-                alt="logo"></a>
+        <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'images/KO-NB-Cares-logo.png' %}" alt="logo"></a>
     </div>
 </nav>
 
-<div class="outer mt5">
-    <div class="login-form">
+
 {% block body %}
 {% endblock %}
-    </div>
-</div>
 
 
 <!-- Bootstrap core JS-->

@@ -26,7 +26,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
     <div class="container px-4">
         <a class="navbar-brand" href="{% url 'home' %}">
-            <img src="https://static.wixstatic.com/media/aa6dd5_c2c807f592a344edaa25e7fea06f6b3b~mv2.png/v1/fill/w_278,h_144,al_c,q_85,usm_0.66_1.00_0.01/aa6dd5_c2c807f592a344edaa25e7fea06f6b3b~mv2.webp" alt="logo"></a>
+            <img src="{% static 'images/KO-NB-Cares-logo.png' %}" alt="logo"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span
                 class="navbar-toggler-icon"></span></button>
@@ -36,6 +36,7 @@
                 <li class="nav-item align-self-end"><a class="nav-link" href="{% url 'about' %}">About</a></li>
                 <li class="nav-item align-self-end"><a class="nav-link" href="{% url 'events' %}">Events</a></li>
                 <li class="nav-item align-self-end"><a class="nav-link" href="{% url 'contacts' %}">Contacts</a></li>
+                <li class="nav-item align-self-end"><a class="nav-link" href="{% url 'admin' %}">Admin Panel</a></li>
                 <li class="nav-item align-self-end">
                     {% if user.is_authenticated %}
                     <a class="nav-link" href="{% url 'logout' %}">Logout</a>

@@ -1,0 +1,109 @@
+{% extends 'ProjectSite/log-base.html' %}
+{% load static %}
+{% block title %}
+    <title>Admin Panel</title>
+{% endblock %}
+
+{% block body %}
+    <br>
+
+<div class="row px-5">
+	<div class="col">
+		<div class="col-md">
+			<div class="card text-center text-white  mb-3" id="total-orders">
+			  	<div class="card-header">
+			  		<h2 class="card-title">Total Organization Events</h2>
+			  	</div>
+			  	<div class="card-body">
+			    	<h3 class="card-title">{{total_events}}</h3>
+			  	</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col">
+		<div class="col-md">
+			<div class="card text-center text-white  mb-3" id="orders-delivered">
+			  	<div class="card-header">
+			  		<h2 class="card-title">Events Accepted</h2>
+			  	</div>
+			  	<div class="card-body">
+			    	<h3 class="card-title">{{completed_events}}</h3>
+			  	</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col">
+		<div class="col-md">
+			<div class="card text-center text-white  mb-3" id="orders-pending">
+			  	<div class="card-header">
+			  		<h2 class="card-title">Events Pending</h2>
+			  	</div>
+			  	<div class="card-body">
+			    	<h3 class="card-title">{{pending_events}}</h3>
+			  	</div>
+			</div>
+		</div>
+	</div>
+</div>
+<br>
+
+<div class="row px-5">
+	<div class="col-md-5">
+		<h5>CUSTOMERS:</h5>
+		<hr>
+		<div class="card card-body">
+			<a class="btn btn-primary  btn-sm btn-block" href="">Create Customer</a>
+			<table class="table table-lg">
+				<tr>
+					<th>Customer</th>
+					<th>Address</th>
+				</tr>
+
+				{% for org in orgs %}
+					<tr>
+						<!--<td><a class="btn btn-sm btn-info" href="% url 'customer' customer.id %}">View</a></td>-->
+						<td>{{org.org_name}}</td>
+						<td>{{org.org_address}}</td>
+					</tr>
+				{% endfor %}
+
+			</table>
+		</div>
+	</div>
+
+	<div class="col-md-7">
+		<h5>LAST 5 ORDERS</h5>
+		<hr>
+		<div class="card card-body">
+            <a class="btn btn-primary  btn-sm btn-block" href="">Create Event</a>
+			<table class="table table-sm">
+				<tr>
+					<th>Event Name</th>
+					<th>By Organization</th>
+					<th>Status</th>
+					<th>Update</th>
+					<th>Remove</th>
+				</tr>
+
+				{% for orgevent in orgevents %}
+					<tr>
+						<td>{{orgevent.org_event_event}}</td>
+						<td>{{orgevent.org_event_organization}}</td>
+						<td>{{orgevent.org_event_status}}</td>
+						<td><a class="btn btn-sm btn-info" href="">Update</a></td>
+						<td><a class="btn btn-sm btn-danger" href="">Delete</a></td>
+
+					</tr>
+				{% endfor %}
+
+
+			</table>
+		</div>
+	</div>
+
+</div>
+
+
+{% endblock %}

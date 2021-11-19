@@ -5,6 +5,8 @@
 {% endblock %}
 
 {% block body %}
+    <div class="outer mt5">
+    <div class="login-form">
         <h3 class="mb3 mt2">Login</h3>
     <form action="" class="login-f" method="post">
         {% csrf_token %}
@@ -22,4 +24,6 @@
         <button class="nav-head nav-head-border-underline fw6" type="submit"> Sign in <i class="fas fa-sign-in-alt"></i></button>
         <a href="#" class="nav-head nav-head-border-underline fw6">Sign Up <i class="fas fa-user-plus"></i></a>
     </form>
+    </div>
+    </div>
 {% endblock %}
