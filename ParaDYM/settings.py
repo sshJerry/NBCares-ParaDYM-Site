@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ProjectSite.apps.ProjectsiteConfig',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
