@@ -1,3 +1,19 @@
+from django.forms import ModelForm
+from .models import OrgEvent, Organization
+
+
+class AdminUserCreation(ModelForm):
+    class Meta:
+        model = Organization
+        fields = '__all__'
+        exclude = ['org_date_created']
+
+
+class OrganizationEventForm(ModelForm):
+    class Meta:
+        model = OrgEvent
+        fields = '__all__'
+
 from django import forms
 from .models import Event
 

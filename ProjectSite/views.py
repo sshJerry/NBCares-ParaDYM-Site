@@ -1,8 +1,13 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from .forms import ProjectForms
-from .models import Event, Organization, OrgEvent
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group
+from django.shortcuts import render, redirect
+from django.forms import inlineformset_factory
+from .forms import ProjectForms, OrganizationEventForm, AdminUserCreation
+from .models import Event, Organization, OrgEvent
+from .filters import OrgEventFilter
+from .decorators import allowed_users
 
 
 def view_home(request):
@@ -17,7 +22,15 @@ def view_contacts(request):
     return render(request, 'ProjectSite/contacts.html')
 
 
+def view_organization_user(request):
+    context = {}
+    return render(request, 'ProjectSite/organization-user.html', context)
+
+
 def view_events(request):
+    orgevents = OrgEvent.objects.all()
+    completed_events = orgevents.filter(org_event_status='Accepted')
+
     event_add = ProjectForms()
     if request.method == 'POST':
         event_add = ProjectForms(request.POST)
@@ -26,31 +39,8 @@ def view_events(request):
             return redirect('events')
 
     events = Event.objects.all()
-    context = {'events': events, 'event_add': event_add}
+    context = {'events': events, 'event_add': event_add, 'completed_events': completed_events}
     return render(request, 'ProjectSite/events.html', context)
-
-
-def update_events(request, event_id):
-    event = Event.objects.get(id=event_id)
-
-    if request.method == 'POST':
-        event_form = ProjectForms(request.POST, instance=event)
-        if event_form.is_valid():
-            event_form.save()
-            return redirect('events')
-    else:
-        event_form = ProjectForms(instance=event)
-    context = {'event_form': event_form}
-    return render(request, 'ProjectSite/events-update.html', context)
-
-
-def delete_events(request, event_id):
-    event = Event.objects.get(id=event_id)
-    if request.method == 'POST':
-        event.delete()
-        return redirect('events')
-    context = {'event': event}
-    return render(request, 'ProjectSite/events-delete.html', context)
 
 
 def view_login(request):
@@ -71,11 +61,54 @@ def view_logout(request):
     return redirect('home')
 
 
-def view_settings(request):
-    return render(request, 'ProjectSite/settings.html')
+@login_required(login_url='login')
+def create_events(request, pk):
+    EventFormSet = inlineformset_factory(Organization, OrgEvent, fields=('org_event_event', 'org_event_status'),
+                                         extra=1)
+    organization = Organization.objects.get(id=pk)
+    formset = EventFormSet(queryset=OrgEvent.objects.none(), instance=organization)
+    # form = OrganizationEventForm(initial={'org_event_organization': organization})
+
+    if request.method == 'POST':
+        # form = OrganizationEventForm(request.POST)
+        formset = EventFormSet(request.POST, instance=organization)
+        if formset.is_valid():
+            formset.save()
+            return redirect('admin_panel')
+    context = {'formset': formset}
+    return render(request, 'ProjectSite/events-create.html', context)
 
 
-def view_admin(request):
+@login_required(login_url='login')
+def update_events(request, pk):
+    orgevents = OrgEvent.objects.get(id=pk)
+    #form = OrganizationEventForm(instance=orgevents)
+
+    if request.method == 'POST':
+        form = OrganizationEventForm(request.POST, instance=orgevents)
+        if form.is_valid():
+            form.save()
+            return redirect('admin_panel')
+    else:
+        form = OrganizationEventForm(instance=orgevents)
+
+    context = {'form': form}
+    return render(request, 'ProjectSite/events-update.html', context)
+
+
+@login_required(login_url='login')
+def delete_events(request, pk):
+    form = OrgEvent.objects.get(id=pk)
+    if request.method == 'POST':
+        form.delete()
+        return redirect('admin_panel')
+    context = {'form': form}
+    return render(request, 'ProjectSite/events-delete.html', context)
+
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles='admin')
+def view_admin_panel(request):
     orgevents = OrgEvent.objects.all()
     orgs = Organization.objects.all()
 
@@ -88,13 +121,35 @@ def view_admin(request):
                'total_orgs': total_orgs, 'total_events': total_events,
                'pending_events': pending_events, 'completed_events': completed_events
                }
-    return render(request, 'ProjectSite/admin.html', context)
+    return render(request, 'ProjectSite/admin-panel.html', context)
 
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles='admin')
 def view_admin_organzation(request, pk):
     org = Organization.objects.get(id=pk)
-    #orgevents = org.order_by.all()
+    # orgevents = org.order_by.all()
     orgevents = org.orgevent_set.all()
+    orgevents_count = orgevents.count()
 
-    context = {'org': org, 'orgevents': orgevents}
-    return render(request, 'ProjectSite/admin-organization.html',context)
+    OrganizationEventFilter = OrgEventFilter(request.GET, queryset=orgevents)
+    orgevents = OrganizationEventFilter.qs
+    context = {'org': org, 'orgevents': orgevents, 'orgevents_count': orgevents_count,
+               'OrganizationEventFilter': OrganizationEventFilter}
+    return render(request, 'ProjectSite/admin-organization.html', context)
+
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles='admin')
+def view_admin_user_creation(request):
+    form = AdminUserCreation()
+    if request.method == 'POST':
+        form = ProjectForms(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('admin_panel')
+        else:
+            form = AdminUserCreation(instance=form)
+
+    context = {'form': form}
+    render(request, 'ProjectSite/admin-user-creation.html', context)
