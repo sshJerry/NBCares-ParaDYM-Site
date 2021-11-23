@@ -1,0 +1,30 @@
+{% extends 'ProjectSite/log-base.html' %}
+{% load static %}
+{% block title %}
+    <title>Login</title>
+{% endblock %}
+
+{% block body %}
+    <div class="outer mt5">
+    <div class="login-form">
+        <h3 class="mb3 mt2">Login</h3>
+    <form action="" class="login-f" method="post">
+        {% csrf_token %}
+        <label class="label-log-reg">
+            <input class="in-login" type="text"
+                   placeholder="Username" name="username"
+                   required minlength="3">
+        </label>
+        <label class="label-log-reg">
+            <input class="in-login" type="password"
+                   placeholder="Password" name="password"
+                   required minlength="3">
+        </label>
+        <a href="#" class="nav-head nav-head-border-underline fw6">Back <i class="fas fa-backspace"></i></a>
+        <button class="nav-head nav-head-border-underline fw6" type="submit"> Sign in <i class="fas fa-sign-in-alt"></i></button>
+        <a href="#" class="nav-head nav-head-border-underline fw6">Sign Up <i class="fas fa-user-plus"></i></a>
+    </form>
+        {{ login_form.errors }}
+    </div>
+    </div>
+{% endblock %}
