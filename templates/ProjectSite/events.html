@@ -105,12 +105,12 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for event in events %}
+                {% for completed_event in completed_events %}
                 <tr>
                     <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#event-summary">+</button></td>
-                    <td>{{ event.event_name }}</td>
-                    <td><a class="update-icon" href="{% url 'update_events' event.id %}"><i class="fas fa-edit"></i></a></td>
-                    <td><a href="{% url 'delete_events' event.id %}" class="delete-icon"><i class="fas fa-trash"></i></a></td>
+                    <td>{{completed_event}}</td>
+                    <!--{ url 'update_events' event.id %} --><td><a class="update-icon" href=""><i class="fas fa-edit"></i></a></td>
+                    <!--{ url 'delete_events' event.id %} --><td><a href="" class="delete-icon"><i class="fas fa-trash"></i></a></td>
                 </tr>
                 {% endfor %}
                 </tbody>
@@ -146,8 +146,8 @@
                 <tr>
                     <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#event-summary">+</button></td>
                     <td>{{ event.event_name }}</td>
-                    <td><a class="update-icon" href="{% url 'update_events' event.id %}"><i class="fas fa-edit"></i></a></td>
-                    <td><a href="{% url 'delete_events' event.id %}" class="delete-icon"><i class="fas fa-trash"></i></a></td>
+                    <!--{ url 'update_events' event.id %} --><td><a class="update-icon" href=""><i class="fas fa-edit"></i></a></td>
+                    <!--{ url 'delete_events' event.id %} --><td><a href="" class="delete-icon"><i class="fas fa-trash"></i></a></td>
                 </tr>
                 {% endfor %}
                 </tbody>
