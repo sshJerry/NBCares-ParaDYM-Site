@@ -1,5 +1,7 @@
 from django.db import models
 
+from django.contrib.auth.models import User
+
 
 # Create your models here.
 
@@ -9,6 +11,7 @@ class Organization(models.Model):
         ('Active', 'Active'),
         ('Inactive', 'Inactive'),
     )
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     org_name = models.CharField(max_length=40, null=True, blank=False)
     org_address = models.CharField(max_length=60, null=True, blank=True)
     org_phone = models.CharField(max_length=20, null=True, blank=True)
@@ -17,7 +20,10 @@ class Organization(models.Model):
     org_date_created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     def __str__(self):
-        return self.org_name
+        return str(self.user)
+
+    # def save(self, *args, **kwargs):
+    # super().save(*args, **kwargs)
 
 
 class Tag(models.Model):
@@ -39,9 +45,9 @@ class Tag(models.Model):
 class Event(models.Model):
     # When writing {{ event }}, The description is whats returned
     event_name = models.CharField(max_length=100, null=True, blank=False)
-    event_sTime = models.DateTimeField(null=True, blank=False)
-    event_eTime = models.DateTimeField(null=True, blank=False)
-    event_description = models.CharField(max_length=400, null=True, blank=True)
+    event_description = models.TextField(max_length=400, null=True, blank=True)
+    event_sTime = models.DateTimeField()  # (null=True, blank=False)
+    event_eTime = models.DateTimeField()  # (null=True, blank=False)
     # event_tag = models.CharField(max_length=20, blank=True, choices=EVENT_TAGS) PREVIOUS
     # org_event_tag = models.ManyToManyField(Tag)
     event_tag = models.ManyToManyField(Tag, blank=True)
