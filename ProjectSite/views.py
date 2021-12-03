@@ -7,7 +7,7 @@ from django.forms import inlineformset_factory
 from django.http import HttpResponse
 from .forms import ProjectForms, OrganizationEventForm, AdminUserCreation, AdminUserCreationAdditionalFields
 from .models import *
-from .filters import OrgEventFilter
+from .filters import OrgEventFilter, ContactsFilters
 from .decorators import allowed_users
 
 
@@ -20,7 +20,11 @@ def view_about(request):
 
 
 def view_contacts(request):
-    return render(request, 'ProjectSite/contacts.html')
+    allcontacts = Contact.objects.all()
+    conFilters = ContactsFilters(request.GET, queryset=allcontacts)
+    filtered_contacts = conFilters.qs
+    context = {'allcontacts':allcontacts, 'filtered_contacts':filtered_contacts, 'conFilters':conFilters}
+    return render(request, 'ProjectSite/contacts.html', context)
 
 
 def view_events(request):

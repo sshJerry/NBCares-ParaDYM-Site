@@ -3,12 +3,14 @@ from .models import Event
 from .models import Tag
 from .models import Organization
 from .models import OrgEvent
+from .models import Contact
 
 # Register your models here.
 admin.site.register(Organization)
 admin.site.register(Tag)
 admin.site.register(Event)
 admin.site.register(OrgEvent)
+admin.site.register(Contact)
 
 """from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User

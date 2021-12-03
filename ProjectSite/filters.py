@@ -12,3 +12,10 @@ class OrgEventFilter(django_filters.FilterSet):
         model = OrgEvent
         fields = '__all__'
         exclude = ['org_event_organization', 'org_event_date_created']
+
+
+class ContactsFilters(django_filters.FilterSet):
+    class Meta:
+        model = Contact
+        fields = ['contact_domain']
+        exclude = ['contact_resource_provider','contact_ages','contact_websites','contact_location','contact_number']
