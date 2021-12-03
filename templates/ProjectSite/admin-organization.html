@@ -5,86 +5,84 @@
 {% endblock %}
 
 {% block body %}
-<br>
+    <br>
 
-<div class="row px-5">
-	<div class="col-md">
-		<div class="card card-body">
-			<h5>Customer:</h5>
-			<hr>
-			<a class="btn btn-outline-info  btn-sm btn-block" href="">Update Customer</a>
-			<a class="btn btn-outline-info  btn-sm btn-block" href="{% url 'create_events' org.id %}">Place Order</a>
-            <a class="btn btn-outline-info  btn-sm btn-block" href="{% url 'admin_panel' %}">Back</a>
+    <div class="row px-5">
+        <div class="col-md">
+            <div class="card card-body">
+                <h5>Organization Options:</h5>
+                <hr>
+                <a class="btn btn-outline-info  btn-sm btn-block" href="">@@ Update Organization</a>
+                <a class="btn btn-outline-info  btn-sm btn-block" href="{% url 'create_events' org.id %}">Submit Event For Organization</a>
+                <a class="btn btn-outline-info  btn-sm btn-block" href="{% url 'admin_panel' %}">Back</a>
 
-		</div>
-	</div>
+            </div>
+        </div>
 
-	<div class="col-md">
-		<div class="card card-body">
-			<h5>Contact Information</h5>
-			<hr>
-			<p style="font-size: 1.2rem">Organization Name: {{org.org_name}}</p>
-			<p style="font-size: 1.2rem">Organization Address: {{org.org_address}}</p>
-            <p style="font-size: 1.2rem">Organization Phone: {{org.org_phone}}</p>
-            <p style="font-size: 1.2rem">Organization Email: {{org.org_email}}</p>
-            <p style="font-size: 1.2rem">Organization Name: {{org.org_status}}</p>
-            <p style="font-size: 1.2rem">Date Created: {{org.org_date_created}}</p>
-		</div>
-	</div>
+        <div class="col-md">
+            <div class="card card-body">
+                <h5>Organization Information</h5>
+                <hr>
+                <p style="font-size: 1.2rem">Organization Name: {{ org.org_name }}</p>
+                <p style="font-size: 1.2rem">Organization Address: {{ org.org_address }}</p>
+                <p style="font-size: 1.2rem">Organization Phone: {{ org.org_phone }}</p>
+                <p style="font-size: 1.2rem">Organization Email: {{ org.org_email }}</p>
+                <p style="font-size: 1.2rem">Organization Name: {{ org.org_status }}</p>
+                <p style="font-size: 1.2rem">Date Created: {{ org.org_date_created }}</p>
+            </div>
+        </div>
 
-	<div class="col-md">
-		<div class="card card-body">
-			<h5>Total Orders</h5>
-			<hr>
-			<h1 style="text-align: center;padding: 10px">{{orgevents_count}}</h1>
-		</div>
-	</div>
-</div>
+        <div class="col-md">
+            <div class="card card-body">
+                <h5>Total Events</h5>
+                <hr>
+                <h1 style="text-align: center;padding: 10px">{{ orgevents_count }}</h1>
+            </div>
+        </div>
+    </div>
 
 
-<br>
-<div class="row px-5">
-	<div class="col">
-		<div class="card card-body">
-			<form method="get">
-            {{ OrganizationEventFilter.form }}
-		    <button class="btn btn-primary" type="submit">Search</button>
-		  </form>
-		</div>
-	</div>
+    <br>
+    <div class="row px-5">
+        <div class="col">
+            <div class="card card-body">
+                <form method="get">
+                    {{ OrganizationEventFilter.form }}
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br>
 
-</div>
-<br>
+    <div class="row px-5">
+        <div class="col-md">
+            <div class="card card-body">
+                <table class="table table-sm">
+                    <tr>
+                        <th>Event</th>
+                        <th>Description</th>
+                        <th>Date Submitted</th>
+                        <th>Event Status</th>
+                        <th>Update</th>
+                        <th>Remove</th>
+                    </tr>
 
-<div class="row px-5">
-	<div class="col-md">
-		<div class="card card-body">
-			<table class="table table-sm">
-				<tr>
-					<th>Product</th>
-					<th>Category</th>
-					<th>Date Orderd</th>
-					<th>Status</th>
-					<th>Update</th>
-					<th>Remove</th>
-				</tr>
+                    {% for orgevent in orgevents %}
 
-				{% for orgevent in orgevents %}
+                        <tr>
+                            <td>{{ orgevent.org_event_event }}</td>
+                            <td>@@NOT IMPLEMENTED</td>
+                            <td>{{ orgevent.org_event_date_created }}</td>
+                            <td>{{ orgevent.org_event_status }}</td>
+                            <td><a class="btn btn-sm btn-info" href="">@@ Update</a></td>
 
-				<tr>
-					<td>{{orgevent.org_event_event}}</td>
-					<td>{{orgevent.org_event_event}}</td>
-					<td>{{orgevent.org_event_date_created}}</td>
-					<td>{{orgevent.org_event_status}}</td>
-					<td><a class="btn btn-sm btn-info" href="">Update</a></td>
-
-					<td><a class="btn btn-sm btn-danger" href="">Delete</a></td>
-				</tr>
-				{% endfor %}
-
-			</table>
-		</div>
-	</div>
-</div>
+                            <td><a class="btn btn-sm btn-danger" href="">@@ Delete</a></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
