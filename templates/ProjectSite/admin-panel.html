@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block body %}
+<!--
     <br>
 <div class="row px-5">
 	<div class="col">
@@ -12,6 +13,51 @@
 			<div class="card text-center text-white  mb-3" id="total-orders">
 			  	<div class="card-header">
 			  		<h2 class="card-title">Total Organization Events</h2>
+			  	</div>
+			  	<div class="card-body">
+			    	<h3 class="card-title">{total_events}}</h3>
+			  	</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col">
+		<div class="col-md">
+			<div class="card text-center text-white  mb-3" id="orders-delivered">
+			  	<div class="card-header">
+			  		<h2 class="card-title">Events Accepted</h2>
+			  	</div>
+			  	<div class="card-body">
+			    	<h3 class="card-title">{completed_events}}</h3>
+			  	</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col">
+		<div class="col-md">
+			<div class="card text-center text-white  mb-3" id="orders-pending">
+			  	<div class="card-header">
+			  		<h2 class="card-title">Events Pending</h2>
+			  	</div>
+			  	<div class="card-body">
+			    	<h3 class="card-title">{pending_events}}</h3>
+			  	</div>
+			</div>
+		</div>
+	</div>
+</div>
+<br>
+
+-->
+<!--
+    <br>
+<div class="row px-5">
+	<div class="col">
+		<div class="col-md">
+			<div class="card text-center text-white  mb-3" id="total-orders">
+			  	<div class="card-header">
+			  		<h2 class="card-title">Total Events</h2>
 			  	</div>
 			  	<div class="card-body">
 			    	<h3 class="card-title">{{total_events}}</h3>
@@ -27,7 +73,7 @@
 			  		<h2 class="card-title">Events Accepted</h2>
 			  	</div>
 			  	<div class="card-body">
-			    	<h3 class="card-title">{{completed_events}}</h3>
+			    	<h3 class="card-title">{completed_events}}</h3>
 			  	</div>
 			</div>
 		</div>
@@ -40,7 +86,7 @@
 			  		<h2 class="card-title">Events Pending</h2>
 			  	</div>
 			  	<div class="card-body">
-			    	<h3 class="card-title">{{pending_events}}</h3>
+			    	<h3 class="card-title">{pending_events}}</h3>
 			  	</div>
 			</div>
 		</div>
@@ -53,7 +99,7 @@
 		<h5>Organizations:</h5>
 		<hr>
 		<div class="card card-body">
-			<a class="btn btn-primary  btn-sm btn-block" href="{% url 'admin_user_creation' %}">Create Organization</a>
+			<a class="btn btn-primary  btn-sm btn-block" href="{ url 'admin_user_creation' %}">Create Organization</a>
 			<table class="table table-lg">
 				<tr>
                     <th></th>
@@ -61,13 +107,13 @@
 					<th>Address</th>
 				</tr>
 
-				{% for org in orgs %}
+				{ for org in orgs %}
 					<tr>
-						<td><a class="btn btn-sm btn-info" href="{% url 'admin_organization' org.id %}">View</a></td>
-						<td>{{org.org_name}}</td>
-						<td>{{org.org_address}}</td>
+						<td><a class="btn btn-sm btn-info" href="{ url 'admin_organization' org.id %}">View</a></td>
+						<td>{org.org_name}}</td>
+						<td>{org.org_address}}</td>
 					</tr>
-				{% endfor %}
+				{ endfor %}
 
 			</table>
 		</div>
@@ -87,13 +133,141 @@
 					<th>Remove</th>
 				</tr>
 
-				{% for orgevent in orgevents %}
+				{ for orgevent in orgevents %}
 					<tr>
-						<td>{{orgevent.org_event_event}}</td>
-						<td>{{orgevent.org_event_organization}}</td>
-						<td>{{orgevent.org_event_status}}</td>
-						<td><a class="btn btn-sm btn-info" href="{% url 'update_events' orgevent.id  %}">Update</a></td>
-						<td><a class="btn btn-sm btn-danger" href="{% url 'delete_events' orgevent.id %}">Delete</a></td>
+						<td>{orgevent.org_event_event}}</td>
+						<td>{orgevent.org_event_organization}}</td>
+						<td>{orgevent.org_event_status}}</td>
+						<td><a class="btn btn-sm btn-info" href="{ url 'update_events' orgevent.id  %}">Update</a></td>
+						<td><a class="btn btn-sm btn-danger" href="{ url 'delete_events' orgevent.id %}">Delete</a></td>
+					</tr>
+				{ endfor %}
+			</table>
+		</div>
+	</div>
+</div>
+-->
+    <br>
+<div class="row px-5">
+	<div class="col">
+		<div class="col-md">
+			<div class="card text-center text-white  mb-3" id="total-orders">
+			  	<div class="card-header">
+			  		<h2 class="card-title">Total Events</h2>
+			  	</div>
+			  	<div class="card-body">
+			    	<h3 class="card-title">{{total_events}}</h3>
+			  	</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col">
+		<div class="col-md">
+			<div class="card text-center text-white  mb-3" id="orders-delivered">
+			  	<div class="card-header">
+			  		<h2 class="card-title">Events Accepted</h2>
+			  	</div>
+			  	<div class="card-body">
+			    	<h3 class="card-title">{{Accepted_events_Count}}</h3>
+			  	</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col">
+		<div class="col-md">
+			<div class="card text-center text-white  mb-3" id="orders-pending">
+			  	<div class="card-header">
+			  		<h2 class="card-title">Events Pending</h2>
+			  	</div>
+			  	<div class="card-body">
+			    	<h3 class="card-title">{{pending_events_Count}}</h3>
+			  	</div>
+			</div>
+		</div>
+	</div>
+</div>
+<br>
+
+<div class="row px-5">
+	<div class="col-md-2">
+		<h5>Organizations:</h5>
+		<hr>
+		<div class="card card-body">
+			<a class="btn btn-primary  btn-sm btn-block" href="{% url 'admin_user_creation' %}">Create Organization</a>
+			<table class="table table-lg">
+				<tr>
+                    <th></th>
+					<th>Customer</th>
+					<th>Status</th>
+				</tr>
+
+				{% for org in orgs %}
+					<tr>
+						<td><a class="btn btn-sm btn-info" href="{% url 'admin_organization' org.id %}">View</a></td>
+						<td>{{org.org_name}}</td>
+						<td>{{org.org_status}}</td>
+					</tr>
+				{% endfor %}
+
+			</table>
+		</div>
+	</div>
+
+	<div class="col-md-3">
+		<h5>Pending Events</h5>
+		<hr>
+		<div class="card card-body">
+			<table class="table table-sm">
+				<tr>
+					<th>Event Name</th>
+					<th>Description</th>
+                    <th>Start Time</th>
+                    <th>End time</th>
+					<th>Tag</th>
+					<th>Update</th>
+					<th>Remove</th>
+				</tr>
+
+				{% for event in pending_events %}
+					<tr>
+						<td>{{event.event_name}}</td>
+						<td>{{event.event_description}}</td>
+                        <td>{{event.event_sTime}}</td>
+                        <td>{{event.event_eTime}}</td>
+						<td>{{event.event_tag}}</td>
+						<td><a class="btn btn-sm btn-info" href="{% url 'update_events' event.id  %}">Update</a></td>
+						<td><a class="btn btn-sm btn-danger" href="{% url 'delete_events' event.id %}">Delete</a></td>
+					</tr>
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+	<div class="col-md-7">
+		<h5>Accepted Events</h5>
+		<hr>
+		<div class="card card-body">
+			<table class="table table-sm">
+				<tr>
+					<th>Event Name</th>
+					<th>Description</th>
+                    <th>Start Time</th>
+                    <th>End time</th>
+					<th>Tag</th>
+					<th>Update</th>
+					<th>Remove</th>
+				</tr>
+
+				{% for event in Accepted_events %}
+					<tr>
+						<td>{{event.event_name}}</td>
+						<td>{{event.event_description}}</td>
+                        <td>{{event.event_sTime}}</td>
+                        <td>{{event.event_eTime}}</td>
+						<td>{{event.event_tag}}</td>
+						<td><a class="btn btn-sm btn-info" href="{% url 'update_events' event.id  %}">Update</a></td>
+						<td><a class="btn btn-sm btn-danger" href="{% url 'delete_events' event.id %}">Delete</a></td>
 					</tr>
 				{% endfor %}
 			</table>

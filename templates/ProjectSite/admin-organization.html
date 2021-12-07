@@ -12,7 +12,7 @@
             <div class="card card-body">
                 <h5>Organization Options:</h5>
                 <hr>
-                <a class="btn btn-outline-info  btn-sm btn-block" href="">@@ Update Organization</a>
+                <!--<a class="btn btn-outline-info  btn-sm btn-block" href="">@@ Update Organization</a>-->
                 <a class="btn btn-outline-info  btn-sm btn-block" href="{% url 'create_events' org.id %}">Submit Event For Organization</a>
                 <a class="btn btn-outline-info  btn-sm btn-block" href="{% url 'admin_panel' %}">Back</a>
 
@@ -61,7 +61,7 @@
                 <table class="table table-sm">
                     <tr>
                         <th>Event</th>
-                        <th>Description</th>
+                        <!--<th>Description</th>-->
                         <th>Date Submitted</th>
                         <th>Event Status</th>
                         <th>Update</th>
@@ -72,7 +72,7 @@
 
                         <tr>
                             <td>{{ orgevent.org_event_event }}</td>
-                            <td>@@NOT IMPLEMENTED</td>
+                            <!--<td>@@NOT IMPLEMENTED</td>-->
                             <td>{{ orgevent.org_event_date_created }}</td>
                             <td>{{ orgevent.org_event_status }}</td>
                             <td><a class="btn btn-sm btn-info" href="">@@ Update</a></td>
