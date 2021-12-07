@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ProjectSite.apps.ProjectsiteConfig',
     'django_filters',
+    'crispy_forms',
 ]
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -122,6 +124,6 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ###############################################################################
-STATIC_ROOT = BASE_DIR / 'static' #Online
-#STATICFILES_DIRS = ['static']  # On Computer
+#STATIC_ROOT = BASE_DIR / 'static' #Online
+STATICFILES_DIRS = ['static']  # On Computer
 ###############################################################################
