@@ -2616,14 +2616,14 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #FFF;
-  background-color: #009688;
-  border-color: #009688;
+  background-color: #834655;
+  border-color: #834655;
 }
 
 .btn-primary:hover {
   color: #FFF;
-  background-color: #007065;
-  border-color: #00635a;
+  background-color: #834655;
+  border-color: #000000;
 }
 
 .btn-primary:focus, .btn-primary.focus {
@@ -6414,7 +6414,7 @@ a.close.disabled {
 }
 
 .bg-primary {
-  background-color: #009688 !important;
+  background-color: #b67786 !important;
 }
 
 a.bg-primary:hover, a.bg-primary:focus,
@@ -16185,8 +16185,8 @@ body .custom-nav,footer {
     --main-color: #EFD466;
     --primary-color: #D7B030; /*Darker Gold, Can be used for text on white background */
     --button-background: #FFF7B6; /*Light Gold, Used for contrast against darker background */
-    --primary-button-background: #093657; /*Lighter Blue, Subheadings? */
-    --background-color: #062844; /*Darker Blue, Background */
+    --primary-button-background: #b67786; /*Lighter RED, Subheadings? */
+    --background-color:  #834655; /*Darker RED, Background */
     margin: 0;
     font-family: var(--bs-body-font-family);
     font-size: var(--bs-body-font-size);
@@ -16270,7 +16270,7 @@ body .custom-nav,footer {
 
 /* -------------------------- FOOTER SECTION-------------------------- */
 footer{
-    --background-color: #062844;
+    --background-color: #834655;
     width: 100%;
     background: var(--background-color);
     height: auto;

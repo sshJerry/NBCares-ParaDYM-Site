@@ -13,8 +13,8 @@ body{
     --main-color: #EFD466;
     --primary-color: #D7B030; /*Darker Gold, Can be used for text on white background */
     --button-background: #FFF7B6; /*Light Gold, Used for contrast against darker background */
-    --primary-button-background: #093657; /*Lighter Blue, Subheadings? */
-    --background-color: #062844; /*Darker Blue, Background */
+    --primary-button-background: #b67786; /*Lighter RED, Subheadings? */
+    --background-color:  #834655; /*Darker RED, Background */
 }
 
 /* -------------------------- HOME SECTION-------------------------- */
