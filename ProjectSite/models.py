@@ -27,14 +27,13 @@ class Organization(models.Model):
 
 
 class Tag(models.Model):
+    # PANTONE 16-1133 TCX.- yellow; 18-1619 TCX maroon
+    # https://icolorpalette.com/color/pantone-16-1133-tcx   -- X to RGB
     EVENT_TAGS = (
-        ('None', 'None'),
-        ('Toddler', 'Toddler'),
-        ('Child', 'Child'),
-        ('Adolescent', 'Adolescent'),
-        ('Adult', 'Adult'),
-        ('Elderly', 'Elderly'),
-        ('Other', 'Other'),
+        ('All',''), ('None', 'None'),('Housing', 'Housing'), ('Employment', 'Employment'),('Education', 'Education'),
+        ('Financial Literacy', 'Financial Literacy'),('Healthcare', 'Healthcare'), ('Mental Health','Mental Health'),
+        ('Family Engagement', 'Family Engagement'),('Children Activities','Children Activities'),('Art','Art'),
+        ('Community Event','Community Event'),('Fundraising','Fundraising'), ('Other', 'Other'),
     )
     tag_name = models.CharField(max_length=30, null=True, blank=True, choices=EVENT_TAGS)
 
@@ -43,6 +42,18 @@ class Tag(models.Model):
 
 
 class Event(models.Model):
+    EVENT_TAGS = (
+        ('Housing', 'Housing'), ('Employment', 'Employment'),('Education', 'Education'),
+        ('Financial Literacy', 'Financial Literacy'),('Healthcare', 'Healthcare'), ('Mental Health','Mental Health'),
+        ('Family Engagement', 'Family Engagement'),('Children Activities','Children Activities'),('Art','Art'),
+        ('Community Event','Community Event'),('Fundraising','Fundraising'), ('Other', 'Other'),
+    )
+    EVENT_STATUS = (
+        (u'A', u'Accepted'),
+        (u'P', u'Pending'),
+        (u'C', u'Canceled'),
+        (u'R', 'Requested For Change'),
+    )
     # When writing {{ event }}, The description is whats returned
     event_name = models.CharField(max_length=100, null=True, blank=False)
     event_description = models.TextField(max_length=400, null=True, blank=True)
@@ -50,7 +61,8 @@ class Event(models.Model):
     event_eTime = models.DateTimeField()  # (null=True, blank=False)
     # event_tag = models.CharField(max_length=20, blank=True, choices=EVENT_TAGS) PREVIOUS
     # org_event_tag = models.ManyToManyField(Tag)
-    event_tag = models.ManyToManyField(Tag, blank=True)
+    event_tag = models.CharField(max_length=30, null=True, choices=EVENT_TAGS)
+    event_status = models.CharField(max_length=30, choices=EVENT_STATUS, default='P')
     event_date_created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     def __str__(self):
@@ -103,7 +115,7 @@ class Contact(models.Model):
         ('Tutoring', 'Tutoring'),
         ('Veteran Services', 'Veteran Services'),
     )
-    contact_domain = models.CharField(max_length=30, null=True, choices=domains)
+    services = models.CharField(max_length=30, null=True, choices=domains)
     contact_resource_provider = models.CharField(max_length=50)
     contact_ages = models.CharField(max_length=20)
     contact_websites = models.CharField(max_length=40, null=True,)

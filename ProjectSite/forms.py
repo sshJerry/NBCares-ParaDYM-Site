@@ -39,7 +39,7 @@ class ProjectForms(ModelForm):
                                      format="%Y-%m-%dT%H:%M", ),
             'event_eTime': DateInput(attrs={'type': 'datetime-local', 'class': 'form-control'},
                                      format="%Y-%m-%dT%H:%M", ),
-            'event-tag': forms.Select(attrs={'class': 'form-select'}, choices=CHOICES),
+            'event-tag': forms.ChoiceField(choices=CHOICES),
         }
         exclude = ['event_date_created']
 

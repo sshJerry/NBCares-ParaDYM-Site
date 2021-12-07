@@ -7,7 +7,7 @@ from django.forms import inlineformset_factory
 from django.http import HttpResponse
 from .forms import ProjectForms, OrganizationEventForm, AdminUserCreation, AdminUserCreationAdditionalFields
 from .models import *
-from .filters import OrgEventFilter, ContactsFilters
+from .filters import OrgEventFilter, ContactFilter, CalendarFilter
 from .decorators import allowed_users
 
 
@@ -21,9 +21,10 @@ def view_about(request):
 
 def view_contacts(request):
     allcontacts = Contact.objects.all()
-    conFilters = ContactsFilters(request.GET, queryset=allcontacts)
-    filtered_contacts = conFilters.qs
-    context = {'allcontacts':allcontacts, 'filtered_contacts':filtered_contacts, 'conFilters':conFilters}
+    conFilters = ContactFilter(request.GET, queryset=allcontacts)
+    allcontacts = conFilters.qs
+
+    context = {'allcontacts': allcontacts, 'conFilters': conFilters}
     return render(request, 'ProjectSite/contacts.html', context)
 
 
@@ -98,7 +99,7 @@ def update_events(request, pk):
 
 @login_required(login_url='login')
 def delete_events(request, pk):
-    form = OrgEvent.objects.get(id=pk)
+    form = Event.objects.get(id=pk)
     if request.method == 'POST':
         form.delete()
         return redirect('admin_panel')
@@ -109,6 +110,20 @@ def delete_events(request, pk):
 @login_required(login_url='login')
 @allowed_users(allowed_roles='admin')
 def view_admin_panel(request):
+    events = Event.objects.all()
+    total_events = events.count()
+    pending_events = events.filter(event_status='P')
+    pending_events_Count = events.filter(event_status='P').count()
+    Accepted_events = events.filter(event_status='A')
+    Accepted_events_Count = events.filter(event_status='A').count()
+    Canceled_events = events.filter(event_status='C')
+    orgs = Organization.objects.all()
+
+    context = {'events': events, 'total_events': total_events, 'pending_events': pending_events,
+               'pending_events_Count': pending_events_Count, 'Accepted_events':Accepted_events,
+               'Accepted_events_Count':Accepted_events_Count, 'orgs':orgs}
+
+    """
     orgevents = OrgEvent.objects.all()
     orgs = Organization.objects.all()
 
@@ -116,11 +131,11 @@ def view_admin_panel(request):
     total_events = orgevents.count()
     pending_events = orgevents.filter(org_event_status='Waiting Approval').count()
     completed_events = orgevents.filter(org_event_status='Accepted').count()
-
     context = {'orgs': orgs, 'orgevents': orgevents,
                'total_orgs': total_orgs, 'total_events': total_events,
                'pending_events': pending_events, 'completed_events': completed_events
                }
+    """
     return render(request, 'ProjectSite/admin-panel.html', context)
 
 
@@ -226,8 +241,12 @@ class view_calendar(generic.View):
     def get(self, request, *args, **kwargs):
         forms = self.class_form()
         events = Event.objects.all()
+        events = events.filter(event_status='A')
+
         print('Events\t\t\t: ' + str(events))
         event_list = []
+        calendarFilter = CalendarFilter(request.GET, queryset=events)
+        events = calendarFilter.qs
         for event in events:
             print('Events List\t\t\t: ' + str(event.event_sTime.date()))
             print('Events List WITH TIME\t\t\t: ' + str(event.event_sTime.date().strftime("%Y-%m-%dT%H:%M:%S")))
@@ -238,7 +257,7 @@ class view_calendar(generic.View):
                     "end": event.event_eTime.date().strftime("%Y-%m-%dT%H:%M:%S"),
                 }
             )
-        context = {'form': forms, 'events': event_list}
+        context = {'form': forms, 'events': event_list, 'calendarFilter': calendarFilter}
         print('POST  List\t\t\t: ' + str(event_list))
         return render(request, 'ProjectSite/calendar-template.html', context)
 
@@ -248,6 +267,15 @@ class view_calendar(generic.View):
             form = forms.save(commit=False)
             form.user = request.user
             form.save()
-            return redirect('events')
+            return redirect('calendar')
         context = {"form": forms}
         return render(request, 'ProjectSite/calendar-template.html', context)
+
+
+"""
+    orgevents = OrgEvent.objects.all()
+    completed_events = orgevents.filter(org_event_status='Accepted')
+
+group = Group.objects.get(name='organizer')
+user.groups.add(group)
+Organization.objects.create(user=user, org_name=user.username)"""
