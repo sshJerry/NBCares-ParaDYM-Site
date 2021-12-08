@@ -14,4 +14,6 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
     instance.organization.save()
 
 
-#Organization.objects.create(user=instance) Disregard
+"""
+https://stackoverflow.com/questions/66491021/doesnotexist-getting-group-matching-query-does-not-exist-error-while-saving
+"""

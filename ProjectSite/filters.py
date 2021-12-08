@@ -5,13 +5,15 @@ from .models import *
 
 
 class OrgEventFilter(django_filters.FilterSet):
-    start_date = DateFilter(field_name="org_event_date_created", lookup_expr='gte')
-    end_date = DateFilter(field_name="org_event_date_created", lookup_expr='lte')
+    nameContains = CharFilter(field_name='event_name', lookup_expr='icontains')
+    eventContains = CharFilter(field_name='event_description', lookup_expr='icontains')
+    start_date = DateFilter(field_name="event_sTime", lookup_expr='gte')
+    end_date = DateFilter(field_name="event_eTime", lookup_expr='lte')
 
     class Meta:
-        model = OrgEvent
-        fields = '__all__'
-        exclude = ['org_event_organization', 'org_event_date_created']
+        model = Event
+        fields = ['event_status']
+        exclude = ['']
 
 
 class ContactFilter(django_filters.FilterSet):

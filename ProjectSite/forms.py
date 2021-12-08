@@ -16,11 +16,18 @@ class AdminUserCreationAdditionalFields(models.ModelForm):
         model = Organization
         fields = ['org_name', 'org_address', 'org_phone', 'org_email']
 
+        widgets = {
+            'org_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': ''}),
+            'org_address': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter Address'}),
+            'org_phone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter Phone Number'}),
+            'org_email': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter Email'}),
+        }
 
-class OrganizationEventForm(ModelForm):
+
+class ProjectUpdateForm(ModelForm):
     class Meta:
-        model = OrgEvent
-        fields = '__all__'
+        model = Event
+        fields = ['event_name', 'event_description', 'event_tag', 'event_status']
 
 
 class ProjectForms(ModelForm):

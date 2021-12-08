@@ -5,7 +5,7 @@ from django.contrib.auth.models import Group
 from django.shortcuts import render, redirect
 from django.forms import inlineformset_factory
 from django.http import HttpResponse
-from .forms import ProjectForms, OrganizationEventForm, AdminUserCreation, AdminUserCreationAdditionalFields
+from .forms import ProjectForms, ProjectUpdateForm , AdminUserCreation, AdminUserCreationAdditionalFields
 from .models import *
 from .filters import OrgEventFilter, ContactFilter, CalendarFilter
 from .decorators import allowed_users
@@ -82,16 +82,16 @@ def create_events(request, pk):
 
 @login_required(login_url='login')
 def update_events(request, pk):
-    orgevents = OrgEvent.objects.get(id=pk)
+    orgevents = Event.objects.get(id=pk)
     # form = OrganizationEventForm(instance=orgevents)
 
     if request.method == 'POST':
-        form = OrganizationEventForm(request.POST, instance=orgevents)
+        form = ProjectUpdateForm(request.POST, instance=orgevents)
         if form.is_valid():
             form.save()
             return redirect('admin_panel')
     else:
-        form = OrganizationEventForm(instance=orgevents)
+        form = ProjectUpdateForm(instance=orgevents)
 
     context = {'form': form}
     return render(request, 'ProjectSite/events-update.html', context)
@@ -112,30 +112,17 @@ def delete_events(request, pk):
 def view_admin_panel(request):
     events = Event.objects.all()
     total_events = events.count()
-    pending_events = events.filter(event_status='P')
-    pending_events_Count = events.filter(event_status='P').count()
-    Accepted_events = events.filter(event_status='A')
-    Accepted_events_Count = events.filter(event_status='A').count()
-    Canceled_events = events.filter(event_status='C')
+    pending_events = events.filter(event_status='Pending')
+    pending_events_Count = events.filter(event_status='Pending').count()
+    Accepted_events = events.filter(event_status='Accepted')
+    Accepted_events_Count = events.filter(event_status='Accepted').count()
+    canceled_events = events.filter(event_status='Canceled')
     orgs = Organization.objects.all()
 
     context = {'events': events, 'total_events': total_events, 'pending_events': pending_events,
                'pending_events_Count': pending_events_Count, 'Accepted_events':Accepted_events,
-               'Accepted_events_Count':Accepted_events_Count, 'orgs':orgs}
+               'Accepted_events_Count':Accepted_events_Count, 'orgs':orgs, 'canceled_events':canceled_events}
 
-    """
-    orgevents = OrgEvent.objects.all()
-    orgs = Organization.objects.all()
-
-    total_orgs = orgs.count()
-    total_events = orgevents.count()
-    pending_events = orgevents.filter(org_event_status='Waiting Approval').count()
-    completed_events = orgevents.filter(org_event_status='Accepted').count()
-    context = {'orgs': orgs, 'orgevents': orgevents,
-               'total_orgs': total_orgs, 'total_events': total_events,
-               'pending_events': pending_events, 'completed_events': completed_events
-               }
-    """
     return render(request, 'ProjectSite/admin-panel.html', context)
 
 
@@ -144,7 +131,7 @@ def view_admin_panel(request):
 def view_admin_organzation(request, pk):
     org = Organization.objects.get(id=pk)
     # orgevents = org.order_by.all()
-    orgevents = org.orgevent_set.all()
+    orgevents = org.event_set.all()
     orgevents_count = orgevents.count()
 
     OrganizationEventFilter = OrgEventFilter(request.GET, queryset=orgevents)
@@ -162,10 +149,7 @@ def view_admin_user_creation(request, *args, **kwargs):
         user_form = AdminUserCreation(request.POST)
         if user_form.is_valid():
             user = user_form.save()
-            """group = Group.objects.get(name='organizer')
-            user.groups.add(group)
-            Organization.objects.create(user=user, org_name=user.username)"""
-            return redirect('home')
+            return redirect('admin_panel')
     context = {'user_form': user_form}
     return render(request, 'ProjectSite/admin-user-creation.html', context)
 
@@ -210,8 +194,11 @@ def view_admin_user_creation(request, *args, **kwargs):
 
 @login_required(login_url='login')
 def view_organization_events(request):
-    org = Organization.objects.get(user=request.user)
-    orgevents = org.orgevent_set.all()
+    #org = Organization.objects.get(user=request.user)
+    #orgevents = org.orgevent_set.all()
+    org = request.user.organization
+    # orgevents = org.order_by.all()
+    orgevents = org.event_set.all()
 
     context = {'orgevents': orgevents}
     return render(request, 'ProjectSite/organization_events.html', context)
@@ -219,12 +206,14 @@ def view_organization_events(request):
 
 def view_organization_settings(request):
     organ = request.user.organization
+    orgevents = organ.event_set.all()
     form = AdminUserCreationAdditionalFields(instance=organ)
     if request.method == 'POST':
         form = AdminUserCreationAdditionalFields(request.POST, instance=organ)
         if form.is_valid():
             form.save()
-    context = {'form': form}
+            return redirect('home')
+    context = {'form': form, 'orgevents':orgevents}
     return render(request, 'ProjectSite/organization-settings.html', context)
 
 
@@ -241,7 +230,7 @@ class view_calendar(generic.View):
     def get(self, request, *args, **kwargs):
         forms = self.class_form()
         events = Event.objects.all()
-        events = events.filter(event_status='A')
+        events = events.filter(event_status='Accepted')
 
         print('Events\t\t\t: ' + str(events))
         event_list = []
@@ -265,7 +254,7 @@ class view_calendar(generic.View):
         forms = self.class_form(request.POST)
         if forms.is_valid():
             form = forms.save(commit=False)
-            form.user = request.user
+            form.user = Organization.objects.get(user=request.user)
             form.save()
             return redirect('calendar')
         context = {"form": forms}
