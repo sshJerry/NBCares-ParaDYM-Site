@@ -23,16 +23,18 @@
                 <button type="button" class="btn" style="background: dodgerblue" data-bs-toggle="modal"
                         data-bs-target="#event-creation" data-bs-whatever="@getbootstrap">Add Events
                 </button>
-                <div class="modal fade" id="event-creation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="event-creation" tabindex="-1" aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Submit Event</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
                             </div>
                             <form action="" method="post">
                                 {% csrf_token %}
-                            <div class="modal-body">
+                                <div class="modal-body">
                                     <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label">Event Name</label>
                                         <!--<input type="text" class="form-control" id="recipient-name">-->
@@ -55,14 +57,16 @@
                                         {{ event_add.event_description }}
                                     </div>
                                     <div class="mb-3">
-                                        <label for="message-text" class="col-form-label" for="inputGroupSelect01">Tag</label>
+                                        <label for="message-text" class="col-form-label"
+                                               for="inputGroupSelect01">Tag</label>
                                         <!-- { event_add.event_tag }} -->
                                     </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Submit Event</button>
-                            </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                    </button>
+                                    <button type="submit" class="btn btn-primary">Submit Event</button>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -97,12 +101,18 @@
                 </thead>
                 <tbody>
                 {% for completed_event in completed_events %}
-                <tr>
-                    <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#event-summary">+</button></td>
-                    <td>{{completed_event}}</td>
-                    <!--{ url 'update_events' event.id %} --><td><a class="update-icon" href=""><i class="fas fa-edit"></i></a></td>
-                    <!--{ url 'delete_events' event.id %} --><td><a href="" class="delete-icon"><i class="fas fa-trash"></i></a></td>
-                </tr>
+                    <tr>
+                        <td>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#event-summary">+
+                            </button>
+                        </td>
+                        <td>{{ completed_event }}</td>
+                        <!--{ url 'update_events' event.id %} -->
+                        <td><a class="update-icon" href=""><i class="fas fa-edit"></i></a></td>
+                        <!--{ url 'delete_events' event.id %} -->
+                        <td><a href="" class="delete-icon"><i class="fas fa-trash"></i></a></td>
+                    </tr>
                 {% endfor %}
                 </tbody>
             </table>
@@ -134,12 +144,18 @@
                 </thead>
                 <tbody>
                 {% for event in events %}
-                <tr>
-                    <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#event-summary">+</button></td>
-                    <td>{{ event.event_name }}</td>
-                    <!--{ url 'update_events' event.id %} --><td><a class="update-icon" href=""><i class="fas fa-edit"></i></a></td>
-                    <!--{ url 'delete_events' event.id %} --><td><a href="" class="delete-icon"><i class="fas fa-trash"></i></a></td>
-                </tr>
+                    <tr>
+                        <td>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#event-summary">+
+                            </button>
+                        </td>
+                        <td>{{ event.event_name }}</td>
+                        <!--{ url 'update_events' event.id %} -->
+                        <td><a class="update-icon" href=""><i class="fas fa-edit"></i></a></td>
+                        <!--{ url 'delete_events' event.id %} -->
+                        <td><a href="" class="delete-icon"><i class="fas fa-trash"></i></a></td>
+                    </tr>
                 {% endfor %}
                 </tbody>
             </table>

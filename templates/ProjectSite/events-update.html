@@ -7,20 +7,22 @@
 
 
 {% block body %}
-<div class="row mx-5 px-5">
-	<div class="col-md-12">
-		<div class="card card-body">
-			<form action="" method="POST">
-				{% csrf_token %}
-				{{form|crispy}}
-                <div class="row">
-                    <div class="col mt-4">
-                        <button class="btn btn-success btn-outline-light btn-lg btn-block" type="submit">Submit</button>
-                        <a href="{% url 'admin_panel' %}" class="btn btn-danger btn-outline-light btn-lg btn-block"><- Go Back</a>
+    <div class="row mx-5 px-5">
+        <div class="col-md-12">
+            <div class="card card-body">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <div class="row">
+                        <div class="col mt-4">
+                            <button class="btn btn-success btn-outline-light btn-lg btn-block" type="submit">Submit
+                            </button>
+                            <a href="{% url 'admin_panel' %}" class="btn btn-danger btn-outline-light btn-lg btn-block"><-
+                                Go Back</a>
+                        </div>
                     </div>
-                </div>
-			</form>
-		</div>
-	</div>
-</div>
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock %}

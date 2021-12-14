@@ -20,45 +20,49 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark navbar-custom mb-5">
     <div class="container px-4">
-        <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'images/KO-NB-Cares-logo.png' %}" alt="logo"></a>
+        <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'images/KO-NB-Cares-logo.png' %}"
+                                                             alt="logo"></a>
     </div>
 </nav>
-    <section class="Login-Form my-4 mx-5">
-        <div class="container">
-            <div class="row no-gutters">
-                <div class="col-lg-5" style="padding: 0px!important;">
-                    <img src="{% static 'images/IMG_0078.jpg' %}" class="img-fluid" style="border-radius: 30px;" alt="">
+<section class="Login-Form my-4 mx-5">
+    <div class="container">
+        <div class="row no-gutters">
+            <div class="col-lg-5" style="padding: 0px!important;">
+                <img src="{% static 'images/IMG_0078.jpg' %}" class="img-fluid" style="border-radius: 30px;" alt="">
+            </div>
+            <div class="col-lg-7 px-5 pt-5">
+                <div class="d-flex justify-content-center">
+                    <img src="{% static 'images/NB Cares logo.jpg' %}" class="img-fluid"
+                         style="width: 11rem;height: 10rem;" alt="">
                 </div>
-                <div class="col-lg-7 px-5 pt-5">
-                    <div class="d-flex justify-content-center">
-                        <img src="{% static 'images/NB Cares logo.jpg' %}" class="img-fluid" style="width: 11rem;height: 10rem;" alt="">
-                    </div>
-                    <div class="d-flex justify-content-center">
-                        <h4>Organization Sign-In</h4>
-                    </div>
-                    <form action="" method="post">
-                        {% csrf_token %}
-                        <div class="form-row d-flex justify-content-center">
-                            <div class="col-lg-7">
-                                <input type="text" placeholder="Username" name="username" required minlength="3" class="form-control my-3 p-4">
-                            </div>
-                        </div>
-                        <div class="form-row d-flex justify-content-center">
-                            <div class="col-lg-7">
-                                <input type="password" placeholder="Password" name="password" required minlength="3" class="form-control my-3 p-4">
-                            </div>
-                        </div>
-                        <div class="form-row d-flex justify-content-center">
-                            <div class="col-lg-7">
-                                <button type="submit" class="btn1 mt-3 mb-2">Login</button>
-                            </div>
-                        </div>
-                    </form>
-                    {{ login_form.errors }}
+                <div class="d-flex justify-content-center">
+                    <h4>Organization Sign-In</h4>
                 </div>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="form-row d-flex justify-content-center">
+                        <div class="col-lg-7">
+                            <input type="text" placeholder="Username" name="username" required minlength="3"
+                                   class="form-control my-3 p-4">
+                        </div>
+                    </div>
+                    <div class="form-row d-flex justify-content-center">
+                        <div class="col-lg-7">
+                            <input type="password" placeholder="Password" name="password" required minlength="3"
+                                   class="form-control my-3 p-4">
+                        </div>
+                    </div>
+                    <div class="form-row d-flex justify-content-center">
+                        <div class="col-lg-7">
+                            <button type="submit" class="btn1 mt-3 mb-2">Login</button>
+                        </div>
+                    </div>
+                </form>
+                {{ login_form.errors }}
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
 
 <!-- Bootstrap core JS-->
