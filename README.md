@@ -5,8 +5,8 @@ The main functionality of this site for most users is a mobile-responsive calend
 <br />
 
 > Technologies Used
-- HTML, CSS, Javascript, JQuery
-- Django.
+- HTML, CSS, Javascript (JQuery), ~~Vue.js~~
+- Python (Django)
 - Databases: SQL Lite, PostGreSQL (Easily migratable for personal use)
 - Hosting: PythonAnywhere, AWS LightSail (Networking for Static IPs, RDS-like Database storage, Ubuntu Env for managing of interpreter, packages, and deployment of files)
 - Packages and Software Used: **[FullCalender](https://fullcalendar.io/)** - For calender functionality. Refer to Requirements.txt of packages used.
@@ -60,6 +60,10 @@ $ # Start the app - custom port
 $ # python manage.py runserver 0.0.0.0:<your_port>
 $
 $ # Access the web app in browser: http://127.0.0.1:8000/
+
+$ # Deployment on PythonAnywhere
+$ pip3.7 install pythonanywhere --user
+$ pa_autoconfigure_django.py --python=3.7 https://github.com/sshJerry/NBCares-ParaDYM-Site --branch=main --nuke
 ```
 
 <br />
