@@ -1,14 +1,13 @@
 from django.contrib.auth import login, logout
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import Group
 from django.shortcuts import render, redirect
 from django.forms import inlineformset_factory
-from django.http import HttpResponse
-from .forms import ProjectForms, ProjectUpdateForm , AdminUserCreation, AdminUserCreationAdditionalFields
+from .forms import ProjectUpdateForm, AdminUserCreation, AdminUserCreationAdditionalFields, ProjectForms
 from .models import *
 from .filters import OrgEventFilter, ContactFilter, CalendarFilter
 from .decorators import allowed_users
+from django.views import generic
 
 
 def view_home(request):
@@ -28,6 +27,8 @@ def view_contacts(request):
     return render(request, 'ProjectSite/contacts.html', context)
 
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles='admin')
 def view_events(request):
     orgevents = OrgEvent.objects.all()
     completed_events = orgevents.filter(org_event_status='Accepted')
@@ -68,10 +69,7 @@ def create_events(request, pk):
                                          extra=1)
     organization = Organization.objects.get(id=pk)
     formset = EventFormSet(queryset=OrgEvent.objects.none(), instance=organization)
-    # form = OrganizationEventForm(initial={'org_event_organization': organization})
-
     if request.method == 'POST':
-        # form = OrganizationEventForm(request.POST)
         formset = EventFormSet(request.POST, instance=organization)
         if formset.is_valid():
             formset.save()
@@ -83,8 +81,6 @@ def create_events(request, pk):
 @login_required(login_url='login')
 def update_events(request, pk):
     orgevents = Event.objects.get(id=pk)
-    # form = OrganizationEventForm(instance=orgevents)
-
     if request.method == 'POST':
         form = ProjectUpdateForm(request.POST, instance=orgevents)
         if form.is_valid():
@@ -120,8 +116,8 @@ def view_admin_panel(request):
     orgs = Organization.objects.all()
 
     context = {'events': events, 'total_events': total_events, 'pending_events': pending_events,
-               'pending_events_Count': pending_events_Count, 'Accepted_events':Accepted_events,
-               'Accepted_events_Count':Accepted_events_Count, 'orgs':orgs, 'canceled_events':canceled_events}
+               'pending_events_Count': pending_events_Count, 'Accepted_events': Accepted_events,
+               'Accepted_events_Count': Accepted_events_Count, 'orgs': orgs, 'canceled_events': canceled_events}
 
     return render(request, 'ProjectSite/admin-panel.html', context)
 
@@ -130,7 +126,6 @@ def view_admin_panel(request):
 @allowed_users(allowed_roles='admin')
 def view_admin_organzation(request, pk):
     org = Organization.objects.get(id=pk)
-    # orgevents = org.order_by.all()
     orgevents = org.event_set.all()
     orgevents_count = orgevents.count()
 
@@ -154,52 +149,10 @@ def view_admin_user_creation(request, *args, **kwargs):
     return render(request, 'ProjectSite/admin-user-creation.html', context)
 
 
-"""  
-    user_form = AdminUserCreation()
-    org_form = AdminUserCreationAdditionalFields()
-
-    if request.method == 'POST':
-        user_form = AdminUserCreation(request.POST)
-        #org_form = AdminUserCreationAdditionalFields(request.POST)
-
-        if user_form.is_valid() and org_form.is_valid():
-            user = user_form.save()
-            group = Group.objects.get(name='organizer')
-            user.groups.add(group)
-            user.refresh_from_db()
-
-            #org_form = AdminUserCreationAdditionalFields(request.POST,instance=profile)
-            org_form.full_clean() #Moved to top
-            profile.user.org_name = profile.POST.get('org_name')
-            profile.user.org_address = org_form.get('org_address')
-            profile.user.org_phone = org_form.get('org_phone')
-            profile.user.org_email = org_form.get('org_email')
-            profile.user.save()
-            #org_form.full_clean()
-            #org_form.save()
-            return redirect('home')
-    context = {'user_form': user_form, 'org_form': org_form}
-    return render(request, 'ProjectSite/admin-user-creation.html', context)"""
-
-
-# else:form = AdminUserCreation(instance=form)
-
-# org_form = AdminUserCreationAdditionalFields(request.POST, instance=user)
-# Makes ONE Organization Object, Users with no Organization information populated
-
-# org_form = AdminUserCreationAdditionalFields(request.POST)
-# Makes Two Organization Objects, One with user and organization information empty, Other without user
-# and organization information populated
-
-
 @login_required(login_url='login')
 def view_organization_events(request):
-    #org = Organization.objects.get(user=request.user)
-    #orgevents = org.orgevent_set.all()
     org = request.user.organization
-    # orgevents = org.order_by.all()
     orgevents = org.event_set.all()
-
     context = {'orgevents': orgevents}
     return render(request, 'ProjectSite/organization_events.html', context)
 
@@ -213,15 +166,8 @@ def view_organization_settings(request):
         if form.is_valid():
             form.save()
             return redirect('home')
-    context = {'form': form, 'orgevents':orgevents}
+    context = {'form': form, 'orgevents': orgevents}
     return render(request, 'ProjectSite/organization-settings.html', context)
-
-
-######################### CALENDAR #########################
-from django.views import generic
-from .forms import ProjectForms
-from .models import Event
-from datetime import datetime
 
 
 class view_calendar(generic.View):
@@ -231,14 +177,10 @@ class view_calendar(generic.View):
         forms = self.class_form()
         events = Event.objects.all()
         events = events.filter(event_status='Accepted')
-
-        print('Events\t\t\t: ' + str(events))
         event_list = []
         calendarFilter = CalendarFilter(request.GET, queryset=events)
         events = calendarFilter.qs
         for event in events:
-            print('Events List\t\t\t: ' + str(event.event_sTime.date()))
-            print('Events List WITH TIME\t\t\t: ' + str(event.event_sTime.date().strftime("%Y-%m-%dT%H:%M:%S")))
             event_list.append(
                 {
                     "title": event.event_name,
@@ -247,7 +189,6 @@ class view_calendar(generic.View):
                 }
             )
         context = {'form': forms, 'events': event_list, 'calendarFilter': calendarFilter}
-        print('POST  List\t\t\t: ' + str(event_list))
         return render(request, 'ProjectSite/calendar-template.html', context)
 
     def post(self, request, *args, **kwargs):
@@ -259,12 +200,3 @@ class view_calendar(generic.View):
             return redirect('calendar')
         context = {"form": forms}
         return render(request, 'ProjectSite/calendar-template.html', context)
-
-
-"""
-    orgevents = OrgEvent.objects.all()
-    completed_events = orgevents.filter(org_event_status='Accepted')
-
-group = Group.objects.get(name='organizer')
-user.groups.add(group)
-Organization.objects.create(user=user, org_name=user.username)"""
