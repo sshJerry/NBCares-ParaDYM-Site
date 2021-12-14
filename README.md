@@ -66,6 +66,8 @@ $ # Access the web app in browser: http://127.0.0.1:8000/
 
 ## Home Page
 Showcasing the look of the Home Page
+![Settings screenshot](https://i.imgur.com/PlZt5FN.jpeg)
 
 ## Login Page
 Showcasing the look of the Login Page
+![Settings screenshot](https://i.imgur.com/qB0nbgg.png)
