@@ -13,8 +13,6 @@ The main functionality of this site for most users is a mobile-responsive calend
 
 <br />
 
-<br />
-
 > Funtionality
 - Admins can Approve Event
 - Admins can Delete Event
@@ -26,6 +24,7 @@ The main functionality of this site for most users is a mobile-responsive calend
 - Unsigned users can View Events
 
 <br />
+
 > Links
 - [To site through AWS](https://github.com/sshJerry/NBCares-ParaDYM-Site) - Omitted for privacy
 - [To site through PythonAnywhere](https://github.com/sshJerry/NBCares-ParaDYM-Site) - Omitted for privacy
