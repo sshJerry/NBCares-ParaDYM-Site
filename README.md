@@ -7,7 +7,7 @@ The main functionality of this site for most users is a mobile-responsive calend
 > Technologies Used
 - HTML, CSS, Javascript (JQuery), ~~Vue.js~~
 - Python (Django)
-- Databases: SQL Lite, PostGreSQL (Easily migratable for personal use)
+- Databases: SQL Lite, PostGreSQL (Easily migratable for personal use). Utilized object relational mapping.
 - Hosting: PythonAnywhere, AWS LightSail (Networking for Static IPs, RDS-like Database storage, Ubuntu Env for managing of interpreter, packages, and deployment of files)
 - Packages and Software Used: **[FullCalender](https://fullcalendar.io/)** - For calender functionality. Refer to Requirements.txt of packages used.
 
